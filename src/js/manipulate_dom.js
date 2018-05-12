@@ -1,6 +1,18 @@
+/* Certain pieces of code on this website taken/referred from:
+* - http://jsfiddle.net/JMPerez/62wafrm7/
+* - http://jsfiddle.net/JMPerez/0u0v7e1b/
+* - code, help and guidance by Kunal Jain
+* - references by official developer guidelies by Spotify API (https://beta.developer.spotify.com/)
+* - authorization guide by spotify
+* - Thank you to everyone
+*/
+
 //Module manipulating the DOM of index.html to add and remove html elements based on user interaction
 
-//Display filterButtons on webpage when user logs in
+/*Display filterButtons on webpage when user logs in
+* Parameters: parsed JSON object returned by trackFeatures
+* Returns: Activates activate_onclick function and passes track features to them
+*/
 function displayFilterBar(audio_track_features) {
   //list of all the filter buttons
   let html = `<button class = "filterButton" id="allButton">All</button><br>
@@ -21,6 +33,8 @@ function displayFilterBar(audio_track_features) {
 * JSON object and displays results of the songs that fit the parameters. The for loop then embeds the
 * song url to the iframs src code to then save all the iframes in html_string as a string and display it
 * at the end of the process through DOM.
+* Parameters: parsed JSON object containing Track features passed on by displayFilterBar
+* Returns: filtered results based on the function called when the user clicks a filter button
 */
 function activate_onclick(features) {
 

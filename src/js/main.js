@@ -9,3 +9,5 @@ var templateSource = document.getElementById('result-template').innerHTML,
   audio_track_features,
   display_url,
   access_token;
+
+console.log(1);

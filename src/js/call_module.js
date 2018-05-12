@@ -1,3 +1,12 @@
+/* Certain pieces of code on this website taken/referred from:
+* - http://jsfiddle.net/JMPerez/62wafrm7/
+* - http://jsfiddle.net/JMPerez/0u0v7e1b/
+* - code, help and guidance by Kunal Jain
+* - references by official developer guidelies by Spotify API (https://beta.developer.spotify.com/)
+* - authorization guide by spotify
+* - Thank you to everyone
+*/
+
 //Module making calls to Spotify API
 
 //begin the function on load of call_module.js i.e. upon loading of the website
@@ -9,7 +18,7 @@
 * on CLIENT_ID and authorization guidelines by Spotify
 */
   function login(callback) {
-    var CLIENT_ID = '7d6bf8f878644fabab3affbc7c90f958';
+    var CLIENT_ID = ''; //enter client ID here.
     var REDIRECT_URI = 'http://localhost/authorization.html';
 
     function getLoginURL(scopes) {
@@ -45,6 +54,8 @@
 
 /* Function getUserData gets app the accessToken provided by Spotify once the user logs in and authorizes
 * the app. This accessToken is then used for making further API calls sent in the header of the request.
+* Parameters: the access token provided by the Spotify API upon user Authorization
+* Returns: User ID of the user by parsing JSON object about user information.
 */
   function getUserData(accessToken) {
     access_token = accessToken;
@@ -61,6 +72,7 @@
 
 /* Defining function getPlaylist to make API calls to retrieve user's current playlist
 * Official Documentation on https://beta.developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
+* Returns: Playlist ID of the user's current playlist
 */
   function getPlaylist() {
     return new Promise(function(resolve, reject) {
@@ -78,6 +90,8 @@
   * user id and playlist id. User id is obtained through the getUserData function and playlist id is
   * obtained through the getPlaylist function JSON responses
   * Official Documentation on https://beta.developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/
+  * Parameters: user ID of user thorugh the getUserData and playlist_id through getPlaylist
+  * Returns: JSON object containing all the tracks in the playlist
   */
   function getTracks(user_id, playlist_id) {
     return new Promise(function(resolve, reject) {
@@ -94,6 +108,8 @@
   /* Function parseGetTrackId to create a list, track_id_list, that contains all the ids of all the songs
   * in the playlist retrieved through getPlaylist and getTracks functions
   * Returns a list track_id_list containing all the track ids.
+  * Parameters: the parsed JSON object contiaing information of all tracks from getTracks
+  * Returns: a list containing track IDs of all the songs in the playlist
   */
   function parseGetTrackId(track_response) {
     let track_id_list = []
@@ -110,6 +126,8 @@
   * This string retrieves the playable buttons of the songs present in the user's playlists
   * and presents them in the results div in the html page.
   * Also converts text of login page to blank.
+  * Parameters: parsed JSON response provided by getTracks
+  * Returns: mini players on the HTML page to play songs
   */
   function getTrackImages(track_response) {
     let html_string = [];
@@ -126,6 +144,8 @@
   /* Defining function trackFeatures to make API calls to retrieve features from songs to create parameters
   * to process for filterButtons.
   * Official Documentation on https://beta.developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/
+  * Parameters: track list returned by parseGetTrackId
+  * Returns: parsed JSON object of all track features
   */
   function trackFeatures(final_track_list) {
     return new Promise(function(resolve, reject) {

@@ -1,3 +1,12 @@
+/* Certain pieces of code taken/referred from:
+* - http://jsfiddle.net/JMPerez/62wafrm7/
+* - http://jsfiddle.net/JMPerez/0u0v7e1b/
+* - code, help and guidance by Kunal Jain
+* - references by official developer guidelies by Spotify API (https://beta.developer.spotify.com/)
+* - authorization guide by spotify
+* - Thank you to everyone
+*/
+
 'use strict';
 
 var gulp = require('gulp');
